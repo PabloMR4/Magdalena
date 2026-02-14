@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cofradía Santa María Magdalena de Hellín</title>
+    <meta name="description" content="Página oficial de la Cofradía Santa María Magdalena de Hellín. Historia, eventos, galería y noticias de nuestra hermandad.">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="logo">
+                    <div class="logo-icon">SMM</div>
+                    <div class="logo-text">
+                        <span class="logo-title">Santa María Magdalena</span>
+                        <span class="logo-subtitle">Cofradía de Hellín</span>
+                    </div>
+                </a>
+                <nav class="nav">
+                    <button class="nav-toggle" aria-label="Menú">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    <ul class="nav-menu">
+                        <li><a href="/" class="active">Inicio</a></li>
+                        <li><a href="/historia.html">Historia</a></li>
+                        <li><a href="/galeria.html">Galería</a></li>
+                        <li><a href="/eventos.html">Eventos</a></li>
+                        <li><a href="/contacto.html">Contacto</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Cofradía Santa María Magdalena</h1>
+            <p>Tradición, fe y devoción en Hellín desde tiempos inmemoriales</p>
+            <a href="/historia.html" class="btn btn-primary">Conoce nuestra historia</a>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Últimas Noticias -->
+        <section class="section section-noticias">
+            <div class="container">
+                <h2 class="section-title">Últimas Noticias de la Cofradía</h2>
+                <div class="noticias-grid" id="noticias-container">
+                    <!-- Noticias se cargarán dinámicamente -->
+                    <div class="loading">Cargando noticias...</div>
+                </div>
+                <div class="section-footer">
+                    <a href="#" class="btn btn-secondary" id="ver-mas-noticias" style="display: none;">Ver todas las noticias</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Próximos Eventos -->
+        <section class="section section-eventos bg-cream">
+            <div class="container">
+                <h2 class="section-title">Próximos Eventos</h2>
+                <div class="eventos-list" id="eventos-container">
+                    <!-- Eventos se cargarán dinámicamente -->
+                    <div class="loading">Cargando eventos...</div>
+                </div>
+                <div class="section-footer">
+                    <a href="/eventos.html" class="btn btn-secondary">Ver calendario completo</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sobre Nosotros -->
+        <section class="section section-about">
+            <div class="container">
+                <div class="about-content">
+                    <div class="about-text">
+                        <h2>Nuestra Cofradía</h2>
+                        <p>La Cofradía de Santa María Magdalena de Hellín es una hermandad con profundas raíces en la tradición religiosa y cultural de nuestra ciudad. Desde hace generaciones, mantenemos viva la devoción a Santa María Magdalena, participando activamente en las celebraciones de Semana Santa y otras festividades religiosas.</p>
+                        <p>Nuestro compromiso es preservar y transmitir los valores de fe, hermandad y servicio a la comunidad que nos han caracterizado a lo largo de nuestra historia.</p>
+                        <a href="/historia.html" class="btn btn-primary">Leer más</a>
+                    </div>
+                    <div class="about-image">
+                        <div class="image-placeholder">
+                            <span>SMM</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Cofradía Santa María Magdalena</h3>
+                    <p>Hellín, Albacete</p>
+                    <p>Tradición y devoción desde tiempos inmemoriales</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Enlaces</h3>
+                    <ul>
+                        <li><a href="/">Inicio</a></li>
+                        <li><a href="/historia.html">Historia</a></li>
+                        <li><a href="/galeria.html">Galería</a></li>
+                        <li><a href="/eventos.html">Eventos</a></li>
+                        <li><a href="/contacto.html">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <p>Email: info@cofradiamagdalena.es</p>
+                    <p>Hellín, Albacete, España</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Cofradía Santa María Magdalena de Hellín. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/main.js"></script>
+</body>
+</html>

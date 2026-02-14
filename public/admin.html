@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración - Cofradía Santa María Magdalena</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="admin-body">
+    <!-- Login Form -->
+    <div id="login-container" class="login-container">
+        <div class="login-box">
+            <div class="login-header">
+                <div class="logo-icon">SMM</div>
+                <h1>Panel de Administración</h1>
+                <p>Cofradía Santa María Magdalena</p>
+            </div>
+            <form id="login-form" class="login-form">
+                <div class="form-group">
+                    <label for="username">Usuario</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Contraseña</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Iniciar sesión</button>
+                <div id="login-error" class="form-message error" style="display: none;"></div>
+            </form>
+            <div class="login-footer">
+                <a href="/">Volver a la página principal</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Panel -->
+    <div id="admin-panel" class="admin-panel" style="display: none;">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="sidebar-header">
+                <div class="logo-icon small">SMM</div>
+                <span>Admin Panel</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-section="dashboard">
+                    <span class="icon">📊</span> Dashboard
+                </a>
+                <a href="#" class="nav-item" data-section="noticias">
+                    <span class="icon">📰</span> Noticias
+                </a>
+                <a href="#" class="nav-item" data-section="eventos">
+                    <span class="icon">📅</span> Eventos
+                </a>
+                <a href="#" class="nav-item" data-section="galeria">
+                    <span class="icon">🖼️</span> Galería
+                </a>
+                <a href="#" class="nav-item" data-section="mensajes">
+                    <span class="icon">✉️</span> Mensajes
+                    <span class="badge" id="unread-badge" style="display: none;">0</span>
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <button id="logout-btn" class="btn btn-secondary btn-small">Cerrar sesión</button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <!-- Dashboard Section -->
+            <section id="section-dashboard" class="admin-section active">
+                <h2>Dashboard</h2>
+                <div class="stats-grid" id="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">📰</div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="stat-noticias">0</span>
+                            <span class="stat-label">Noticias</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📅</div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="stat-eventos">0</span>
+                            <span class="stat-label">Eventos</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🖼️</div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="stat-galeria">0</span>
+                            <span class="stat-label">Imágenes</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">✉️</div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="stat-mensajes">0</span>
+                            <span class="stat-label">Mensajes sin leer</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="quick-actions">
+                    <h3>Acciones rápidas</h3>
+                    <div class="actions-grid">
+                        <button class="action-btn" onclick="showSection('noticias'); openNoticiaForm();">
+                            Nueva noticia
+                        </button>
+                        <button class="action-btn" onclick="showSection('eventos'); openEventoForm();">
+                            Nuevo evento
+                        </button>
+                        <button class="action-btn" onclick="showSection('galeria'); openGaleriaForm();">
+                            Subir imagen
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Noticias Section -->
+            <section id="section-noticias" class="admin-section">
+                <div class="section-header">
+                    <h2>Gestión de Noticias</h2>
+                    <button class="btn btn-primary" onclick="openNoticiaForm()">Nueva noticia</button>
+                </div>
+                <div class="data-table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Imagen</th>
+                                <th>Título</th>
+                                <th>Fecha</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="noticias-table-body">
+                            <tr><td colspan="5" class="loading">Cargando...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Eventos Section -->
+            <section id="section-eventos" class="admin-section">
+                <div class="section-header">
+                    <h2>Gestión de Eventos</h2>
+                    <button class="btn btn-primary" onclick="openEventoForm()">Nuevo evento</button>
+                </div>
+                <div class="data-table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Título</th>
+                                <th>Fecha</th>
+                                <th>Lugar</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="eventos-table-body">
+                            <tr><td colspan="4" class="loading">Cargando...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Galería Section -->
+            <section id="section-galeria" class="admin-section">
+                <div class="section-header">
+                    <h2>Gestión de Galería</h2>
+                    <button class="btn btn-primary" onclick="openGaleriaForm()">Subir imagen</button>
+                </div>
+                <div class="gallery-admin-grid" id="galeria-admin-grid">
+                    <div class="loading">Cargando...</div>
+                </div>
+            </section>
+
+            <!-- Mensajes Section -->
+            <section id="section-mensajes" class="admin-section">
+                <div class="section-header">
+                    <h2>Mensajes de Contacto</h2>
+                    <button class="btn btn-secondary" onclick="markAllRead()">Marcar todos como leídos</button>
+                </div>
+                <div class="messages-list" id="mensajes-list">
+                    <div class="loading">Cargando...</div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">Título</h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <!-- Form content will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast notifications -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <script src="/js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería - Cofradía Santa María Magdalena de Hellín</title>
+    <meta name="description" content="Galería de fotos de la Cofradía Santa María Magdalena de Hellín. Procesiones, eventos y momentos especiales.">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="logo">
+                    <div class="logo-icon">SMM</div>
+                    <div class="logo-text">
+                        <span class="logo-title">Santa María Magdalena</span>
+                        <span class="logo-subtitle">Cofradía de Hellín</span>
+                    </div>
+                </a>
+                <nav class="nav">
+                    <button class="nav-toggle" aria-label="Menú">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    <ul class="nav-menu">
+                        <li><a href="/">Inicio</a></li>
+                        <li><a href="/historia.html">Historia</a></li>
+                        <li><a href="/galeria.html" class="active">Galería</a></li>
+                        <li><a href="/eventos.html">Eventos</a></li>
+                        <li><a href="/contacto.html">Contacto</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Galería de Fotos</h1>
+            <p>Momentos y recuerdos de nuestra cofradía</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main>
+        <section class="section">
+            <div class="container">
+                <!-- Filtros -->
+                <div class="gallery-filters">
+                    <button class="filter-btn active" data-filter="todas">Todas</button>
+                    <div id="category-filters">
+                        <!-- Categorías se cargarán dinámicamente -->
+                    </div>
+                </div>
+
+                <!-- Galería -->
+                <div class="gallery-grid" id="gallery-container">
+                    <!-- Imágenes se cargarán dinámicamente -->
+                    <div class="loading">Cargando galería...</div>
+                </div>
+
+                <!-- Mensaje sin imágenes -->
+                <div class="empty-state" id="empty-gallery" style="display: none;">
+                    <div class="empty-icon">📷</div>
+                    <h3>No hay imágenes en la galería</h3>
+                    <p>Pronto añadiremos fotos de nuestros eventos y procesiones.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close">&times;</button>
+        <button class="lightbox-prev">&#10094;</button>
+        <button class="lightbox-next">&#10095;</button>
+        <div class="lightbox-content">
+            <img src="" alt="" id="lightbox-image">
+            <div class="lightbox-caption" id="lightbox-caption"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Cofradía Santa María Magdalena</h3>
+                    <p>Hellín, Albacete</p>
+                    <p>Tradición y devoción desde tiempos inmemoriales</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Enlaces</h3>
+                    <ul>
+                        <li><a href="/">Inicio</a></li>
+                        <li><a href="/historia.html">Historia</a></li>
+                        <li><a href="/galeria.html">Galería</a></li>
+                        <li><a href="/eventos.html">Eventos</a></li>
+                        <li><a href="/contacto.html">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <p>Email: info@cofradiamagdalena.es</p>
+                    <p>Hellín, Albacete, España</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Cofradía Santa María Magdalena de Hellín. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/main.js"></script>
+    <script>
+        // Initialize gallery page
+        document.addEventListener('DOMContentLoaded', () => {
+            loadGallery();
+            initLightbox();
+        });
+
+        let currentImages = [];
+        let currentIndex = 0;
+
+        async function loadGallery(categoria = 'todas') {
+            const container = document.getElementById('gallery-container');
+            const emptyState = document.getElementById('empty-gallery');
+
+            try {
+                const url = categoria === 'todas'
+                    ? '/api/galeria'
+                    : `/api/galeria?categoria=${encodeURIComponent(categoria)}`;
+
+                const response = await fetch(url);
+                const data = await response.json();
+
+                currentImages = data.imagenes || [];
+
+                // Load category filters
+                if (data.categorias && data.categorias.length > 0) {
+                    const filtersContainer = document.getElementById('category-filters');
+                    filtersContainer.innerHTML = data.categorias.map(cat =>
+                        `<button class="filter-btn" data-filter="${cat}">${capitalizeFirst(cat)}</button>`
+                    ).join('');
+
+                    // Add event listeners to filter buttons
+                    document.querySelectorAll('.filter-btn').forEach(btn => {
+                        btn.addEventListener('click', () => {
+                            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                            btn.classList.add('active');
+                            loadGallery(btn.dataset.filter);
+                        });
+                    });
+                }
+
+                if (currentImages.length === 0) {
+                    container.innerHTML = '';
+                    emptyState.style.display = 'block';
+                    return;
+                }
+
+                emptyState.style.display = 'none';
+                container.innerHTML = currentImages.map((img, index) => `
+                    <div class="gallery-item" data-index="${index}">
+                        <img src="${img.imagen}" alt="${img.titulo || 'Imagen de la galería'}" loading="lazy">
+                        ${img.titulo ? `<div class="gallery-item-caption">${img.titulo}</div>` : ''}
+                    </div>
+                `).join('');
+
+                // Add click listeners for lightbox
+                container.querySelectorAll('.gallery-item').forEach(item => {
+                    item.addEventListener('click', () => {
+                        openLightbox(parseInt(item.dataset.index));
+                    });
+                });
+            } catch (error) {
+                console.error('Error loading gallery:', error);
+                container.innerHTML = '<p class="error">Error al cargar la galería</p>';
+            }
+        }
+
+        function capitalizeFirst(str) {
+            return str.charAt(0).toUpperCase() + str.slice(1);
+        }
+
+        function initLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            const closeBtn = lightbox.querySelector('.lightbox-close');
+            const prevBtn = lightbox.querySelector('.lightbox-prev');
+            const nextBtn = lightbox.querySelector('.lightbox-next');
+
+            closeBtn.addEventListener('click', closeLightbox);
+            prevBtn.addEventListener('click', () => navigateLightbox(-1));
+            nextBtn.addEventListener('click', () => navigateLightbox(1));
+
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) closeLightbox();
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (lightbox.classList.contains('active')) {
+                    if (e.key === 'Escape') closeLightbox();
+                    if (e.key === 'ArrowLeft') navigateLightbox(-1);
+                    if (e.key === 'ArrowRight') navigateLightbox(1);
+                }
+            });
+        }
+
+        function openLightbox(index) {
+            currentIndex = index;
+            const lightbox = document.getElementById('lightbox');
+            const img = document.getElementById('lightbox-image');
+            const caption = document.getElementById('lightbox-caption');
+
+            img.src = currentImages[index].imagen;
+            caption.textContent = currentImages[index].titulo || '';
+
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function navigateLightbox(direction) {
+            currentIndex += direction;
+            if (currentIndex < 0) currentIndex = currentImages.length - 1;
+            if (currentIndex >= currentImages.length) currentIndex = 0;
+
+            const img = document.getElementById('lightbox-image');
+            const caption = document.getElementById('lightbox-caption');
+
+            img.src = currentImages[currentIndex].imagen;
+            caption.textContent = currentImages[currentIndex].titulo || '';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto - Cofradía Santa María Magdalena de Hellín</title>
+    <meta name="description" content="Contacta con la Cofradía Santa María Magdalena de Hellín. Formulario de contacto e información.">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="logo">
+                    <div class="logo-icon">SMM</div>
+                    <div class="logo-text">
+                        <span class="logo-title">Santa María Magdalena</span>
+                        <span class="logo-subtitle">Cofradía de Hellín</span>
+                    </div>
+                </a>
+                <nav class="nav">
+                    <button class="nav-toggle" aria-label="Menú">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    <ul class="nav-menu">
+                        <li><a href="/">Inicio</a></li>
+                        <li><a href="/historia.html">Historia</a></li>
+                        <li><a href="/galeria.html">Galería</a></li>
+                        <li><a href="/eventos.html">Eventos</a></li>
+                        <li><a href="/contacto.html" class="active">Contacto</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Contacto</h1>
+            <p>Ponte en contacto con nuestra cofradía</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main>
+        <section class="section">
+            <div class="container">
+                <div class="contact-wrapper">
+                    <!-- Formulario -->
+                    <div class="contact-form-container">
+                        <h2>Envíanos un mensaje</h2>
+                        <p>Completa el formulario y nos pondremos en contacto contigo lo antes posible.</p>
+
+                        <form id="contact-form" class="contact-form">
+                            <div class="form-group">
+                                <label for="nombre">Nombre completo *</label>
+                                <input type="text" id="nombre" name="nombre" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Correo electrónico *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="mensaje">Mensaje *</label>
+                                <textarea id="mensaje" name="mensaje" rows="5" required></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-block">
+                                Enviar mensaje
+                            </button>
+
+                            <div id="form-message" class="form-message"></div>
+                        </form>
+                    </div>
+
+                    <!-- Información de contacto -->
+                    <div class="contact-info">
+                        <h2>Información de contacto</h2>
+
+                        <div class="info-card">
+                            <div class="info-icon">📍</div>
+                            <div class="info-content">
+                                <h3>Dirección</h3>
+                                <p>Hellín, Albacete<br>Castilla-La Mancha, España</p>
+                            </div>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="info-icon">✉️</div>
+                            <div class="info-content">
+                                <h3>Email</h3>
+                                <p>info@cofradiamagdalena.es</p>
+                            </div>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="info-icon">🕐</div>
+                            <div class="info-content">
+                                <h3>Horario de atención</h3>
+                                <p>Lunes a Viernes: 18:00 - 20:00<br>Sábados: 10:00 - 13:00</p>
+                            </div>
+                        </div>
+
+                        <div class="social-links">
+                            <h3>Síguenos</h3>
+                            <div class="social-icons">
+                                <a href="#" class="social-icon" aria-label="Facebook">
+                                    <span>f</span>
+                                </a>
+                                <a href="#" class="social-icon" aria-label="Instagram">
+                                    <span>ig</span>
+                                </a>
+                                <a href="#" class="social-icon" aria-label="Twitter">
+                                    <span>X</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mapa -->
+        <section class="section bg-cream">
+            <div class="container">
+                <h2 class="section-title">Nuestra ubicación</h2>
+                <div class="map-container">
+                    <div class="map-placeholder">
+                        <p>Hellín, Albacete</p>
+                        <p>Castilla-La Mancha, España</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA para unirse -->
+        <section class="section section-cta">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>¿Quieres formar parte de nuestra cofradía?</h2>
+                    <p>Si deseas unirte a nuestra hermandad y participar en nuestras actividades, no dudes en contactarnos. Estaremos encantados de recibirte.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Cofradía Santa María Magdalena</h3>
+                    <p>Hellín, Albacete</p>
+                    <p>Tradición y devoción desde tiempos inmemoriales</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Enlaces</h3>
+                    <ul>
+                        <li><a href="/">Inicio</a></li>
+                        <li><a href="/historia.html">Historia</a></li>
+                        <li><a href="/galeria.html">Galería</a></li>
+                        <li><a href="/eventos.html">Eventos</a></li>
+                        <li><a href="/contacto.html">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <p>Email: info@cofradiamagdalena.es</p>
+                    <p>Hellín, Albacete, España</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Cofradía Santa María Magdalena de Hellín. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('contact-form');
+            const messageDiv = document.getElementById('form-message');
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                const submitBtn = form.querySelector('button[type="submit"]');
+                const originalText = submitBtn.textContent;
+                submitBtn.textContent = 'Enviando...';
+                submitBtn.disabled = true;
+
+                try {
+                    const formData = {
+                        nombre: document.getElementById('nombre').value,
+                        email: document.getElementById('email').value,
+                        mensaje: document.getElementById('mensaje').value
+                    };
+
+                    const response = await fetch('/api/contacto', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(formData)
+                    });
+
+                    const data = await response.json();
+
+                    if (response.ok) {
+                        messageDiv.className = 'form-message success';
+                        messageDiv.textContent = data.message;
+                        form.reset();
+                    } else {
+                        messageDiv.className = 'form-message error';
+                        messageDiv.textContent = data.error || 'Error al enviar el mensaje';
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    messageDiv.className = 'form-message error';
+                    messageDiv.textContent = 'Error de conexión. Inténtalo de nuevo.';
+                } finally {
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

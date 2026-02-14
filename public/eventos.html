@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventos - Cofradía Santa María Magdalena de Hellín</title>
+    <meta name="description" content="Calendario de eventos y actividades de la Cofradía Santa María Magdalena de Hellín.">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="logo">
+                    <div class="logo-icon">SMM</div>
+                    <div class="logo-text">
+                        <span class="logo-title">Santa María Magdalena</span>
+                        <span class="logo-subtitle">Cofradía de Hellín</span>
+                    </div>
+                </a>
+                <nav class="nav">
+                    <button class="nav-toggle" aria-label="Menú">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    <ul class="nav-menu">
+                        <li><a href="/">Inicio</a></li>
+                        <li><a href="/historia.html">Historia</a></li>
+                        <li><a href="/galeria.html">Galería</a></li>
+                        <li><a href="/eventos.html" class="active">Eventos</a></li>
+                        <li><a href="/contacto.html">Contacto</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Eventos y Actividades</h1>
+            <p>Calendario de actividades de nuestra cofradía</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main>
+        <section class="section">
+            <div class="container">
+                <!-- Toggle -->
+                <div class="events-toggle">
+                    <button class="toggle-btn active" data-view="upcoming">Próximos eventos</button>
+                    <button class="toggle-btn" data-view="all">Todos los eventos</button>
+                </div>
+
+                <!-- Lista de Eventos -->
+                <div class="events-container" id="events-container">
+                    <!-- Eventos se cargarán dinámicamente -->
+                    <div class="loading">Cargando eventos...</div>
+                </div>
+
+                <!-- Mensaje sin eventos -->
+                <div class="empty-state" id="empty-events" style="display: none;">
+                    <div class="empty-icon">📅</div>
+                    <h3>No hay eventos programados</h3>
+                    <p>Pronto publicaremos información sobre nuestros próximos eventos.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Eventos Destacados -->
+        <section class="section bg-cream">
+            <div class="container">
+                <h2 class="section-title">Eventos Anuales</h2>
+                <div class="featured-events">
+                    <div class="featured-event">
+                        <div class="event-date-badge">
+                            <span class="month">MAR/ABR</span>
+                            <span class="detail">Variable</span>
+                        </div>
+                        <div class="event-info">
+                            <h3>Semana Santa</h3>
+                            <p>Nuestra participación más importante del año. La cofradía procesiona por las calles de Hellín acompañando la imagen de Santa María Magdalena.</p>
+                        </div>
+                    </div>
+                    <div class="featured-event">
+                        <div class="event-date-badge">
+                            <span class="month">JUL</span>
+                            <span class="detail">22</span>
+                        </div>
+                        <div class="event-info">
+                            <h3>Festividad de Santa María Magdalena</h3>
+                            <p>Celebración especial en honor a nuestra patrona con misa solemne, actos de devoción y actividades para todos los cofrades.</p>
+                        </div>
+                    </div>
+                    <div class="featured-event">
+                        <div class="event-date-badge">
+                            <span class="month">DIC</span>
+                            <span class="detail">Variable</span>
+                        </div>
+                        <div class="event-info">
+                            <h3>Asamblea General Anual</h3>
+                            <p>Reunión anual de todos los cofrades para revisar el año y planificar las actividades del próximo año.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Cofradía Santa María Magdalena</h3>
+                    <p>Hellín, Albacete</p>
+                    <p>Tradición y devoción desde tiempos inmemoriales</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Enlaces</h3>
+                    <ul>
+                        <li><a href="/">Inicio</a></li>
+                        <li><a href="/historia.html">Historia</a></li>
+                        <li><a href="/galeria.html">Galería</a></li>
+                        <li><a href="/eventos.html">Eventos</a></li>
+                        <li><a href="/contacto.html">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <p>Email: info@cofradiamagdalena.es</p>
+                    <p>Hellín, Albacete, España</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Cofradía Santa María Magdalena de Hellín. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            loadEvents(true);
+
+            // Toggle buttons
+            document.querySelectorAll('.toggle-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    loadEvents(btn.dataset.view === 'upcoming');
+                });
+            });
+        });
+
+        async function loadEvents(upcomingOnly = true) {
+            const container = document.getElementById('events-container');
+            const emptyState = document.getElementById('empty-events');
+
+            try {
+                const url = upcomingOnly
+                    ? '/api/eventos?upcoming=true'
+                    : '/api/eventos';
+
+                const response = await fetch(url);
+                const data = await response.json();
+
+                const eventos = data.eventos || [];
+
+                if (eventos.length === 0) {
+                    container.innerHTML = '';
+                    emptyState.style.display = 'block';
+                    return;
+                }
+
+                emptyState.style.display = 'none';
+                container.innerHTML = eventos.map(evento => {
+                    const fecha = new Date(evento.fecha_evento);
+                    const isPast = fecha < new Date();
+
+                    return `
+                        <article class="event-card ${isPast ? 'past' : ''}">
+                            <div class="event-date">
+                                <span class="day">${fecha.getDate()}</span>
+                                <span class="month">${fecha.toLocaleDateString('es-ES', { month: 'short' }).toUpperCase()}</span>
+                                <span class="year">${fecha.getFullYear()}</span>
+                            </div>
+                            <div class="event-content">
+                                <h3>${evento.titulo}</h3>
+                                ${evento.descripcion ? `<p>${evento.descripcion}</p>` : ''}
+                                <div class="event-meta">
+                                    ${evento.lugar ? `<span class="event-location">📍 ${evento.lugar}</span>` : ''}
+                                    <span class="event-time">🕐 ${fecha.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })}</span>
+                                </div>
+                            </div>
+                            ${evento.imagen ? `<div class="event-image"><img src="${evento.imagen}" alt="${evento.titulo}"></div>` : ''}
+                        </article>
+                    `;
+                }).join('');
+            } catch (error) {
+                console.error('Error loading events:', error);
+                container.innerHTML = '<p class="error">Error al cargar los eventos</p>';
+            }
+        }
+    </script>
+</body>
+</html>
